@@ -1,11 +1,11 @@
-aplication que j'ai a conaitre :
-shodan
-nmap.online
-wigle.net
+📦 Outils de découverte et de sécurité réseau :
+Shodan 1: Un moteur de recherche pour les objets connectés à Internet. Il vous permet de rechercher des appareils, des serveurs et des services exposés en ligne.
+Nmap Online 1: Un scanner Nmap en ligne qui vous permet d’analyser des domaines ou des adresses IP. Il fournit des résultats de scan Nmap pour votre cible.
+Wigle.net 1: Une base de données de points d’accès Wi-Fi et de réseaux sans fil. Vous pouvez y rechercher des informations sur les réseaux Wi-Fi à proximité.
 
-logiciel a aprendre :
-metasploit (vulnerabiliter informatique don le reversshell)
-sqlmap (attaque web/automatisation)
-hydra (brutforceur de mot de passe en ligne)
-burpsuite (decortiquer des paket)
-netcat (ecouter des port)
+🛠️ Logiciels à apprendre :
+Metasploit : Un outil puissant pour l’exploitation de vulnérabilités. Il vous permet de tester la sécurité de vos systèmes en simulant des attaques. ❌
+Sqlmap : Un outil automatisé pour détecter et exploiter les vulnérabilités SQL dans les applications web. ❌
+Hydra : Un outil de bruteforce de mots de passe en ligne. Il peut tester des combinaisons de mots de passe pour accéder à des services protégés par mot de passe. ❌
+Burp Suite : Un proxy web pour l’analyse de sécurité des applications. Il vous permet de décortiquer les paquets HTTP et d’identifier les vulnérabilités. ❌
+Netcat : Un utilitaire réseau polyvalent qui peut être utilisé pour écouter des ports, transférer des données et créer des connexions réseau. ❌
