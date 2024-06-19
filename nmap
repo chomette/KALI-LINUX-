@@ -1,0 +1,12 @@
+pour scan l'adresse ip pour decourvrire les port dispognible 
+   ```
+   Nmap (ip)
+   ```
+pour avoire plus d'iformation sur les port 
+   ```
+   Nmap -v (ip)
+   ```
+pour savoire les faille des securité qu'il y a dans ces port
+   ```
+   JSP la comande
+   ```
