@@ -4,8 +4,8 @@ nmap.online
 wigle.net
 
 logiciel a aprendre :
-metasploit 
-sqlmap
-msfvenome
-meterpreter
-hydra
+metasploit (vulnerabiliter informatique don le reversshell)
+sqlmap (attaque web/automatisation)
+hydra (brutforceur de mot de passe en ligne)
+burpsuite (decortiquer des paket)
+netcat (ecouter des port)
