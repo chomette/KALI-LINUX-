@@ -1,7 +1,7 @@
 📦 Outils de découverte et de sécurité réseau :
-Shodan 1: Un moteur de recherche pour les objets connectés à Internet. Il vous permet de rechercher des appareils, des serveurs et des services exposés en ligne.
-Nmap Online 1: Un scanner Nmap en ligne qui vous permet d’analyser des domaines ou des adresses IP. Il fournit des résultats de scan Nmap pour votre cible.
-Wigle.net 1: Une base de données de points d’accès Wi-Fi et de réseaux sans fil. Vous pouvez y rechercher des informations sur les réseaux Wi-Fi à proximité.
+Shodan : Un moteur de recherche pour les objets connectés à Internet(ip). Il vous permet de rechercher des appareils, des serveurs et des services exposés en ligne.
+Nmap Online ou l'app znmapGUI : Un scanner Nmap en ligne qui vous permet d’analyser des domaines ou des adresses IP. Il fournit des résultats de scan Nmap pour votre cible.
+Wigle.net : Une base de données de points d’accès Wi-Fi et de réseaux sans fil. Vous pouvez y rechercher des informations sur les réseaux Wi-Fi à proximité.
 
 🛠️ Logiciels à apprendre :
 Metasploit : Un outil puissant pour l’exploitation de vulnérabilités. Il vous permet de tester la sécurité de vos systèmes en simulant des attaques. ❌
