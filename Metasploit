@@ -1,3 +1,14 @@
+Qu’est-ce que Metasploit ? 
+Metasploit est un framework open source basé sur Ruby qui permet d’écrire, de tester et d’exécuter du code d’exploitation. Il offre une suite d’outils pour tester les vulnérabilités de sécurité, 
+énumérer les réseaux, exécuter des attaques et échapper à la détection 1.
+
+Fonctionnalités de Metasploit :
+Exploits : Metasploit propose une vaste collection d’exploits pour diverses vulnérabilités. Vous pouvez les utiliser pour tester la sécurité de vos systèmes.
+Payloads : Les payloads sont des charges utiles qui sont exécutées sur la machine cible après une exploitation réussie. Ils peuvent être utilisés pour obtenir un accès distant, exécuter des commandes, etc.
+Modules auxiliaires : Ces modules fournissent des fonctionnalités supplémentaires, telles que la découverte de services, la collecte d’informations et l’énumération de vulnérabilités.
+Post-exploitation : Metasploit permet également d’exécuter des tâches post-exploitation, telles que la récupération de mots de passe, la capture d’écran, etc.
+
+Comande prinsipale :
 1. Tout d'abord, ouvre un terminal sur Kali Linux et entre la commande suivante pour lancer Metasploit :
    ```
    msfconsole
