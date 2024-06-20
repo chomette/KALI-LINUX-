@@ -1,1 +1,12 @@
+ces quoi Ettercap ?  
+Ettercap est un outil puissant pour le sniffing (écoute) de réseau et les attaques de l’homme du milieu. Il est utilisé pour l’évaluation de la sécurité réseau et les tests de pénétration. 
 
+Voici quelques-unes de ses fonctionnalités :
+Sniffing : Ettercap peut capturer et analyser les connexions en direct.
+Attaques de l’homme du milieu : Il permet de manipuler les communications entre les hôtes.
+ARP Spoofing : Ettercap peut tromper les hôtes en falsifiant les tables ARP.
+Session Hijacking : Il peut intercepter et contrôler les sessions.
+Analyse des protocoles : Ettercap prend en charge la dissection active et passive de nombreux protocoles.
+Génération de rapports : Il peut générer des rapports d’analyse réseau.
+
+Pas de comande il sutilise seulment par un interface grphique (logiciel disponible sur la distribusion (kali)linux
