@@ -1,0 +1,11 @@
+Ces quoi Wireshark ?
+Wireshark est utilisé pour l’analyse de paquets et le dépannage réseau. 
+
+Voici quelleqe une de ces posibiliter :
+Capture de paquets : Une fois installé, lancez Wireshark et sélectionnez l’interface réseau que vous souhaitez surveiller. Wireshark capturera ensuite tous les paquets transitant par cette interface.
+Filtrage : Utilisez des filtres pour afficher uniquement les paquets pertinents. Par exemple, vous pouvez filtrer par adresse IP, protocole ou port.
+Analyse des paquets : Wireshark affiche les détails de chaque paquet capturé, y compris les en-têtes, les données et les informations de protocole. Vous pouvez également suivre les flux de données entre les hôtes.
+Dépannage réseau : Utilisez Wireshark pour identifier les problèmes de réseau, tels que les goulots d’étranglement, les erreurs de configurati"n ou les attaques.
+Ettercap : Wireshark peut etre aussi utiliser avec Ettercap pour analyser tous le resaux sur lequel vous ete 
+
+au
