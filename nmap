@@ -1,3 +1,14 @@
+Qu’est-ce que Nmap ? 
+Nmap est un logiciel d’analyse de réseau qui exploite les paquets IP pour identifier tous les appareils connectés à un réseau et fournir des informations sur les services et les systèmes 
+d’exploitation qu’ils exécutent. Il est souvent utilisé en ligne de commande et est compatible avec divers systèmes d’exploitation tels que Linux, Free BSD et Gentoo.
+
+Fonctionnalités de Nmap :
+Découverte d’hôtes actifs sur un réseau.
+Balayage de ports pour détecter les services ouverts.
+Identification du système d’exploitation d’une machine.
+Détection de la version des services.
+
+Comande principale de Nmap :
 1. pour scan l'adresse ip pour decourvrire les port dispognible 
    ```
    Nmap (ip)
