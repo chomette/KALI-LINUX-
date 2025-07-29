@@ -1,0 +1,96 @@
+WiFiPhisher - Tutoriel Complet
+Un outil automatisé pour les tests de phishing Wi-Fi (Evil Twin).
+
+⚠️ À utiliser uniquement à des fins légales et éthiques (pentest autorisé).
+
+📦 Installation
+Prérequis :
+Kali Linux (ou toute distribution basée sur Debian).
+Une carte Wi-Fi compatible avec le mode monitor.
+Accès root (sudo).
+Étapes :
+Mettez à jour votre système :
+
+bash
+
+Copy
+sudo apt update && sudo apt upgrade -y
+Installez WiFiPhisher :
+
+bash
+
+Copy
+sudo apt install -y wifiphisher
+Vérifiez l'installation :
+
+bash
+
+Copy
+wifiphisher --help
+🚀 Utilisation Basique
+1. Lancement de l'outil
+bash
+
+Copy
+sudo wifiphisher
+2. Sélection de l'interface Wi-Fi
+Choisissez l'interface Wi-Fi (ex: wlan0).
+3. Scan des réseaux disponibles
+WiFiPhisher affiche une liste des réseaux à proximité.
+Sélectionnez un réseau à imiter (ex: FreeWiFi).
+4. Choix du scénario de phishing
+WiFiPhisher propose plusieurs scénarios prédéfinis :
+
+Option	Scénario	Utilité
+1	Browser Plugin Update	Distribuer des faux plugins.
+2	OAuth Login Page	Voler des identifiants sociaux (Facebook/Google).
+3	Firmware Upgrade Page	Capturer des mots de passe Wi-Fi.
+4	Network Manager Connect	Imiter un gestionnaire de réseau.
+👉 Pour capturer email/prénom/mot de passe, utilisez un scénario personnalisé (voir section avancée).
+
+🎯 Fonctionnalités Avancées
+1. Scénario Personnalisé
+Créez une page de phishing sur mesure :
+
+Placez votre template HTML dans /usr/share/wifiphisher/phishing-pages/custom/.
+Lancez WiFiPhisher en mode personnalisé :
+bash
+
+Copy
+sudo wifiphisher --custom-phishing /chemin/vers/votre_page.html
+2. Redirection vers Internet
+Après la soumission du formulaire, WiFiPhisher peut :
+
+Donner accès à Internet (pour éviter les soupçons).
+Continuer à capturer d'autres victimes.
+3. Journalisation des données
+Les identifiants capturés sont stockés dans :
+
+bash
+
+Copy
+/tmp/wifiphisher-webserver.tmp
+🔧 Dépannage
+Problème : Aucun réseau détecté
+Vérifiez que votre carte Wi-Fi est en mode monitor :
+bash
+
+Copy
+sudo airmon-ng start wlan0
+Assurez-vous d'être à portée d'un réseau actif.
+Problème : Erreurs de dépendances
+Réinstallez WiFiPhisher :
+bash
+
+Copy
+sudo apt install --reinstall wifiphisher
+📜 Exemple Complet
+Création d'un faux portail Wi-Fi
+Lancez WiFiPhisher :
+bash
+
+Copy
+sudo wifiphisher
+Sélectionnez wlan0 et un réseau à imiter (ex: Starbucks_Guest).
+Choisissez le scénario 2 - OAuth Login Page.
+Attendez que les victimes se connectent et saisissent leurs identifiants.
