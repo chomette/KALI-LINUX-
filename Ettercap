@@ -9,4 +9,7 @@ Session Hijacking : Il peut intercepter et contrôler les sessions.
 Analyse des protocoles : Ettercap prend en charge la dissection active et passive de nombreux protocoles.
 Génération de rapports : Il peut générer des rapports d’analyse réseau.
 
-Pas de comande il sutilise seulment par un interface grphique (logiciel disponible sur la distribusion (kali)linux
+sudo ip link set wlan0 down
+sudo iwconfig wlan0 mode monitor
+sudo ip link set wlan0 up
+
