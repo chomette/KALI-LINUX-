@@ -1,11 +1,108 @@
-Ces quoi Wireshark ?
-Wireshark est utilisé pour l’analyse de paquets et le dépannage réseau. 
+🦈 Fiche Wireshark – Commandes & Astuces
+✅ 1. Lancer Wireshark
+GUI (interface graphique) :
+bash
+Copier
+Modifier
+wireshark
+En ligne de commande (capture sans interface) :
+bash
+Copier
+Modifier
+tshark -i wlan0
+🔌 2. Choisir l’interface réseau
+Les interfaces possibles :
 
-Voici quelleqe une de ces posibiliter :
-Capture de paquets : Une fois installé, lancez Wireshark et sélectionnez l’interface réseau que vous souhaitez surveiller. Wireshark capturera ensuite tous les paquets transitant par cette interface.
-Filtrage : Utilisez des filtres pour afficher uniquement les paquets pertinents. Par exemple, vous pouvez filtrer par adresse IP, protocole ou port.
-Analyse des paquets : Wireshark affiche les détails de chaque paquet capturé, y compris les en-têtes, les données et les informations de protocole. Vous pouvez également suivre les flux de données entre les hôtes.
-Dépannage réseau : Utilisez Wireshark pour identifier les problèmes de réseau, tels que les goulots d’étranglement, les erreurs de configurati"n ou les attaques.
-Ettercap : Wireshark peut etre aussi utiliser avec Ettercap pour analyser tous le resaux sur lequel vous ete 
+eth0 → Ethernet (filaire)
 
-Pas de comande il sutilise seulment par un interface grphique (logiciel disponible sur la distribusion (kali)linux
+wlan0 → Wi-Fi (carte principale)
+
+wlan1 → Antenne Wi-Fi USB
+
+lo → Loopback (trafic interne à ton ordi)
+
+bluetooth-monitor → Bluetooth (si dispo)
+
+💡 Pour écouter tout ce qui passe en Wi-Fi : utilise wlan0 (ou wlan1) en mode monitor.
+
+📡 3. Passer ta carte en mode monitor
+bash
+Copier
+Modifier
+sudo ip link set wlan0 down
+sudo iw dev wlan0 set type monitor
+sudo ip link set wlan0 up
+(ou utilise airmon-ng start wlan0 pour automatiser)
+
+🔍 4. Filtres Wireshark (Display Filters)
+Filtre	Description
+ip.addr == 192.168.1.10	Tout le trafic vers ou depuis cette IP
+tcp	Montre uniquement les paquets TCP
+udp	Montre uniquement les paquets UDP
+http	Montre les paquets HTTP (si pas chiffré)
+wlan.fc.type_subtype == 0x08	Beacons (signaux Wi-Fi autour de toi)
+wlan.sa == XX:XX:XX:XX:XX:XX	Trafic venant d'une MAC précise
+frame contains "password"	Paquets contenant le mot "password"
+
+🧠 5. Commandes Tshark (version terminal de Wireshark)
+Lister les interfaces :
+
+bash
+Copier
+Modifier
+tshark -D
+Sniffer en live :
+
+bash
+Copier
+Modifier
+tshark -i wlan0
+Enregistrer une capture :
+
+bash
+Copier
+Modifier
+tshark -i wlan0 -w capture.pcap
+Lire un fichier .pcap :
+
+bash
+Copier
+Modifier
+tshark -r capture.pcap
+Filtrer sur une IP :
+
+bash
+Copier
+Modifier
+tshark -i wlan0 -f "host 192.168.1.1"
+🧰 6. Analyser un .pcap (Wireshark GUI)
+Ouvre Wireshark
+
+Clique sur File > Open → choisis ton fichier .pcap
+
+Utilise les filtres pour cibler le trafic intéressant
+
+Clique sur un paquet → Détails dans le bas de l’écran
+
+Clique droit > "Follow TCP Stream" pour lire les échanges
+
+📦 7. Bonus : Capturer un handshake Wi-Fi
+Mets ta carte en monitor :
+
+bash
+Copier
+Modifier
+sudo airmon-ng start wlan0
+Lance la capture :
+
+bash
+Copier
+Modifier
+sudo airodump-ng wlan0mon
+Attends qu’un device se connecte ou fais une déauth :
+
+bash
+Copier
+Modifier
+sudo aireplay-ng --deauth 10 -a [BSSID] wlan0mon
+Le fichier .cap peut être ouvert dans Wireshark ou utilisé dans Aircrack-ng.
